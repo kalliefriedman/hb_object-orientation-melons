@@ -1,5 +1,6 @@
 """This file should have our order classes in it."""
 from random import randint
+import datetime as dt
 
 
 class AbstractMelonOrder(object):
@@ -13,6 +14,11 @@ class AbstractMelonOrder(object):
 
     def get_base_price(self):
         base_price = randint(5, 9)
+        now = dt.datetime.now()
+        hour = now.hour
+        day_of_week = now.weekday()
+        if (day_of_week < 5) and (8 <= hour < 11):
+            base_price += 4
         return base_price
 
     def get_total(self):
