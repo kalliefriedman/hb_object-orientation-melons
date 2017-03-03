@@ -1,7 +1,6 @@
 """This file should have our order classes in it."""
 
 
-
 class AbstractMelonOrder(object):
     """Melon Order"""
 
@@ -13,8 +12,9 @@ class AbstractMelonOrder(object):
 
     def get_total(self):
         """Calculate price."""
-
         base_price = 5
+        if self.species == "Christmas melon":
+            base_price = base_price * 1.5
         total = (1 + self.tax) * self.qty * base_price
         return total
 
@@ -50,3 +50,9 @@ class InternationalMelonOrder(AbstractMelonOrder):
         """Return the country code."""
 
         return self.country_code
+
+    def get_total(self):
+        total = super(InternationalMelonOrder, self).get_total()
+        if self.qty < 10:
+            total += 3
+        return total
