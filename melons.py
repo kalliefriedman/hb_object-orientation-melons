@@ -2,6 +2,8 @@
 from random import randint
 import datetime as dt
 
+class TooManyMelonsError(ValueError):
+    pass
 
 class AbstractMelonOrder(object):
     """Melon Order"""
