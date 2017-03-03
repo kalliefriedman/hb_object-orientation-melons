@@ -11,6 +11,17 @@ class AbstractMelonOrder(object):
         self.qty = qty
         self.shipped = False
 
+    def get_total(self):
+        """Calculate price."""
+
+        base_price = 5
+        total = (1 + self.tax) * self.qty * base_price
+        return total
+
+    def mark_shipped(self):
+        """Set shipped to true."""
+
+        self.shipped = True
 
 
 class DomesticMelonOrder(AbstractMelonOrder):
@@ -19,21 +30,9 @@ class DomesticMelonOrder(AbstractMelonOrder):
     def __init__(self, species, qty):
         """Initialize melon order attributes"""
 
-        super(DomesticMelonOrder, self).__init__(self, species, qty)
+        super(DomesticMelonOrder, self).__init__(species, qty)
         self.order_type = "domestic"
         self.tax = 0.08
-
-    def get_total(self):
-        """Calculate price."""
-
-        base_price = 5
-        total = (1 + self.tax) * self.qty * base_price
-        return total
-
-    def mark_shipped(self):
-        """Set shipped to true."""
-
-        self.shipped = True
 
 
 class InternationalMelonOrder(AbstractMelonOrder):
@@ -42,22 +41,10 @@ class InternationalMelonOrder(AbstractMelonOrder):
     def __init__(self, species, qty, country_code):
         """Initialize melon order attributes"""
 
-        super(InternationalMelonOrder, self).__init__(self, species, qty)
+        super(InternationalMelonOrder, self).__init__(species, qty)
         self.country_code = country_code
         self.order_type = "international"
         self.tax = 0.17
-
-    def get_total(self):
-        """Calculate price."""
-
-        base_price = 5
-        total = (1 + self.tax) * self.qty * base_price
-        return total
-
-    def mark_shipped(self):
-        """Set shipped to true."""
-
-        self.shipped = True
 
     def get_country_code(self):
         """Return the country code."""
